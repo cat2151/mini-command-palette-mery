@@ -111,7 +111,7 @@ function openFile(filename) {
 function main() {
   var macroDir   = MeryInfo.GetMacroFolderPath() + "\\miniCommandPalette\\"; // 当macroのあるdir
   var listName   = macroDir + "work\\list.js"
-  var migemoDict = macroDir + "dict\\migemo-dict"
+  var migemoDict = macroDir + "miniIncrementalSearchFilter\\dict\\migemo-dict"
   miniCommandPalette_macroMap   = miniCommandPalette_getMacroMap(); // uniqな名前にした。ほかのmacroと名称被りを防止する用。ここは関数内varにしない（するとreloadを3回以上できなくなる）
   miniCommandPalette_resultName = macroDir + "work\\result.js";     // uniqな名前にした。関数内varにしない。custom.jsからexecMacro()で使うので。
 

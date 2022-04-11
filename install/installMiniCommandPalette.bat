@@ -1,13 +1,13 @@
 @powershell -NoProfile -ExecutionPolicy Unrestricted "$s=[scriptblock]::create((gc \"%~f0\"|?{$_.readcount -gt 1})-join\"`n\");&$s" %*&goto:eof
 
 function install_miniCommandPalette() {
-    curl.exe -L https://github.com/cat2151/mini-command-palette-mery/releases/download/v1.0.0/miniCommandPaletteMery.zip --output miniCommandPaletteMery.zip
-    Expand-Archive -Path miniCommandPaletteMery.zip -DestinationPath . -Force
-    del miniCommandPaletteMery.zip
+    curl.exe -L https://github.com/cat2151/mini-command-palette-mery/releases/download/v1.0.0/miniCommandPalette.zip --output miniCommandPalette.zip
+    Expand-Archive -Path miniCommandPalette.zip -DestinationPath . -Force
+    del miniCommandPalette.zip
 }
 
 function install_miniIncrementalSearchFilter() {
-    pushd miniCommandPaletteMery
+    pushd miniCommandPalette
     curl.exe -L https://github.com/cat2151/mini-incremental-search-filter/releases/download/v1.0.0/miniIncrementalSearchFilter.zip --output miniIncrementalSearchFilter.zip
     Expand-Archive -Path miniIncrementalSearchFilter.zip -DestinationPath . -Force
     del miniIncrementalSearchFilter.zip
@@ -15,9 +15,9 @@ function install_miniIncrementalSearchFilter() {
 }
 
 function install_migemo() {
-    pushd miniCommandPaletteMery\miniIncrementalSearchFilter
+    pushd miniCommandPalette\miniIncrementalSearchFilter
     curl.exe -L https://raw.githubusercontent.com/cat2151/migemo-auto-install-for-windows/main/install_cmigemo.bat --output install_cmigemo.bat
-    install_cmigemo.bat
+    cmd /c install_cmigemo.bat
     popd
 }
 
