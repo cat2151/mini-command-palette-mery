@@ -2,6 +2,8 @@
 #include "include/MeryInfo.js"
 #include "include/IO.js"
 
+// 階層化マクロメニューのコードを参考にしています : https://www.haijin-boys.com/wiki/%E9%9A%8E%E5%B1%A4%E5%8C%96%E3%83%9E%E3%82%AF%E3%83%AD%E3%83%A1%E3%83%8B%E3%83%A5%E3%83%BC
+
 // reloadを繰り返して実行できる用（IO.Includeの恩恵を受けつつ同じmacroを再帰的に実行できる用）
 function miniCommandPalette_getMacroMap() {
   if (typeof miniCommandPalette_macroMap === 'undefined') return {};
@@ -45,7 +47,7 @@ function execMacro(filename) { // 関数名はシンプルにした。custom.js�
   }
 
   var macro;
-  if (filename == resultName/*グローバル変数。custom.jsにては引数にresultNameは書かない（カスタマイズをシンプルにする）*/) {
+  if (filename == miniCommandPalette_resultName/*グローバル変数。custom.jsにては引数にminiCommandPalette_resultNameは書かない（カスタマイズをシンプルにする）*/) {
     macro = IO.LoadFromFile(filename, "utf-8"); // includeを使わない。reload後に別の内容のresult.jsを読む用
   } else {
     if (miniCommandPalette_macroMap[filename]) {
@@ -56,6 +58,12 @@ function execMacro(filename) { // 関数名はシンプルにした。custom.js�
       miniCommandPalette_macroMap[filename] = macro;
     }
   }
+
+  var path = filename;
+  var ScriptFullName, ScriptFullname, scriptfullname, ScriptName, Scriptname, scriptname; // 実行されたscriptが、script自身のファイル名を認識できる用。例えば 階層化マクロメニュー.js 等のscriptを動作させる用。この部分のコードは 階層化マクロメニュー を参考にしています。
+  ScriptFullName = ScriptFullname = scriptfullname = path;
+  ScriptName = Scriptname = scriptname = IO.Path.GetFileName(path);
+
   eval(macro);
 }
 
@@ -104,13 +112,13 @@ function main() {
   var macroDir   = MeryInfo.GetMacroFolderPath() + "\\miniCommandPalette\\"; // 当macroのあるdir
   var listName   = macroDir + "work\\list.js"
   var migemoDict = macroDir + "dict\\migemo-dict"
-  miniCommandPalette_macroMap = miniCommandPalette_getMacroMap(); // uniqな名前にした。ほかのmacroと名称被りを防止する用。ここは関数内varにしない（するとreloadを3回以上できなくなる）
-  resultName = macroDir + "work\\result.js"; // 関数内varにしない。custom.jsからexecMacro()で使うので。
+  miniCommandPalette_macroMap   = miniCommandPalette_getMacroMap(); // uniqな名前にした。ほかのmacroと名称被りを防止する用。ここは関数内varにしない（するとreloadを3回以上できなくなる）
+  miniCommandPalette_resultName = macroDir + "work\\result.js";     // uniqな名前にした。関数内varにしない。custom.jsからexecMacro()で使うので。
 
   createList_ifNotExist(listName, macroDir);
-  deleteFile(resultName); // キャンセル時に前回のmacroを実行しないよう
-  selectMacro(macroDir, listName, resultName, migemoDict);
-  execMacro(resultName);
+  deleteFile(miniCommandPalette_resultName); // キャンセル時に前回のmacroを実行しないよう
+  selectMacro(macroDir, listName, miniCommandPalette_resultName, migemoDict);
+  execMacro(miniCommandPalette_resultName);
 }
 
 
