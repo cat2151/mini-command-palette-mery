@@ -7,6 +7,7 @@ function copy_files() {
     copy ..\src\miniCommandPalette.js miniCommandPalette
     copy ..\src\createList.js         miniCommandPalette
     copy ..\src\custom_sample.js      miniCommandPalette
+    copy ..\src\filterEditing.js      miniCommandPalette
 }
 
 function compress() {
