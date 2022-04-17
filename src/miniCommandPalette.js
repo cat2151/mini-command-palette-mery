@@ -26,7 +26,7 @@ function deleteFile(filename) {
 
 function selectMacro(macroDir, listName, resultName, migemoDict) {
   var exeName = macroDir + "miniIncrementalSearchFilter\\miniIncrementalSearchFilter.exe";
-  var cmd = exeName + " " + listName + " " + resultName + " --encode utf_8 --andsearch --migemo " + migemoDict;
+  var cmd = exeName + " " + listName + " " + resultName + " --encode utf_8 --andsearch --migemo " + migemoDict + " --alpha 0.96 --width 150 --height 40";
   execCmd(cmd);
 }
 
