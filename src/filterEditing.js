@@ -19,7 +19,7 @@ function getEncode() {
 
 function filterEditing(macroDir, nowEditName, resultName, migemoDict, encode) {
   var exeName = macroDir + "miniIncrementalSearchFilter\\miniIncrementalSearchFilter.exe";
-  var cmd = exeName + " " + nowEditName + " " + resultName + " --encode " + encode + " --andsearch --migemo " + migemoDict;
+  var cmd = exeName + " " + nowEditName + " " + resultName + " --encode " + encode + " --andsearch --migemo " + migemoDict + " --alpha 0.96 --width 150 --height 40";
   execCmd(cmd);
 }
 
