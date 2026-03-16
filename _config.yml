@@ -1,0 +1,8 @@
+title: "mini-command-palette-mery"
+description: "mini-command-palette-mery"
+theme: jekyll-theme-slate
+github:
+  is_project_page: true
+  repository_url: https://github.com/cat2151/mini-command-palette-mery
+plugins:
+  - jekyll-sitemap
